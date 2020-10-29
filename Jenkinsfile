@@ -1,3 +1,5 @@
+#!/usr/binenv groovy
+
 pipeline {
     agent any
 
