@@ -23,13 +23,22 @@ pipeline {
 
          }
 
-            post {
-                // If Maven was able to run the tests, even if some of the test
+        when{
+            expression{
+                params.EXECUTE_TEST
+                    }
+              }
+        post {
+                //  Maven was able to run the tests, even if some of the test
                 // failed, record the test results and archive the jar file.
                 Always {
                     junit '**/target/surefire-reports/TEST-*.xml'
                     archiveArtifacts 'target/*.jar'
                     }
                 }
+      stage("Deploy"){
+          echo "deploying the application"
+          echo "deploying version: ${params.VERSION}"
+        }
     }
  }
