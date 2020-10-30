@@ -19,7 +19,7 @@ pipeline {
                  } 
              }
     
-        stage ('Build') {
+        stage ("Build") {
         steps{
                 // Run Maven on a ec2 agent.
               sh 'mvn clean compile'
