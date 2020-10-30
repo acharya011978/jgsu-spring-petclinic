@@ -1,4 +1,4 @@
-#! /usr/bin/env groovy
+
 
 pipeline {
     agent any
@@ -15,7 +15,8 @@ pipeline {
                  git branch: 'main', url: 'https://github.com/acharya011978/jgsu-spring-petclinic.git'
                 } 
              }
-    stage ('Build') {
+    
+        stage ('Build') {
         steps{
                 // Run Maven on a ec2 agent.
                 sh './mvnw clean compile'
@@ -28,14 +29,15 @@ pipeline {
                 params.EXECUTE_TEST
                     }
               }
+      
         post {
-                //  Maven was able to run the tests, even if some of the test
-                // failed, record the test results and archive the jar file.
                 Always {
                     junit '**/target/surefire-reports/TEST-*.xml'
                     archiveArtifacts 'target/*.jar'
                     }
                 }
+        
+        
       stage("Deploy"){
           echo "deploying the application"
           echo "deploying version: ${params.VERSION}"
