@@ -3,7 +3,11 @@
 pipeline {
     agent any
 
- 
+    parameters{
+        string(name: 'VERSION', defaultValue: '1.0', description: 'string: Version to deploy on production server')
+        choice(name: 'VERSION', choices: ['1.0','1.1','1.2'], descriptoin: 'choice: Version to deploy on production server')
+        booleanParam(name: 'EXECUTE_TEST', defaultValue: true, description: 'boolean: Version to deploy on production server')
+            }
     stages {
         stage('Checkout') {
             steps { 
