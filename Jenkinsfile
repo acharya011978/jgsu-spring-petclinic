@@ -6,7 +6,7 @@ pipeline {
      
  stages {
         stage("Checkout") {
-            echo "Job Name:  ${params.JOB_NAME}"
+            echo 'Job Name:  ${params.JOB_NAME}'
             steps { 
                     git branch: 'main', url: 'https://github.com/acharya011978/jgsu-spring-petclinic.git'
                  } 
@@ -30,8 +30,8 @@ pipeline {
   }
         
  stage("Deploy"){
-          echo "deploying the application"
-          echo "deploying version: ${params.VERSION}"
+          echo 'deploying the application'
+          echo 'deploying version: ${params.VERSION}'
    }
         
     }
