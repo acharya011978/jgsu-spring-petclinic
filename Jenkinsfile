@@ -4,23 +4,21 @@ pipeline {
     agent any
 
      
-    stages {
-        stage('Checkout') {
+ stages {
+        stage("Checkout") {
             echo "Job Name:  ${params.JOB_NAME}"
             steps { 
                     git branch: 'main', url: 'https://github.com/acharya011978/jgsu-spring-petclinic.git'
                  } 
-             }
+         }
     
-        stage ("Build") {
+ stage ("Build") {
         steps{
                 // Run Maven on a ec2 agent.
               sh 'mvn clean compile'
               
             }
 
-         }
-        
       
         post {
                 Always {
@@ -28,12 +26,13 @@ pipeline {
                     archiveArtifacts 'target/*.jar'
                     }
                 }
+            
+  }
         
-        
-      stage("Deploy"){
+ stage("Deploy"){
           echo "deploying the application"
           echo "deploying version: ${params.VERSION}"
-        }
+   }
         
     }
  }
