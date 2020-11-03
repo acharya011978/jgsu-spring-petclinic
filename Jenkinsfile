@@ -3,14 +3,7 @@
 pipeline {
     agent any
 
-    parameters{
-        CODE_CHANGES = getGitChanges()
-        JOB_NAME = "petAnimals_pipeline"
-        string(name: 'VERSION', defaultValue: '1.0', description: 'string: Version to deploy on production server')
-        choice(name: 'VERSION', choices: ['1.0','1.1','1.2'], descriptoin: 'choice: Version to deploy on production server')
-        booleanParam(name: 'EXECUTE_TEST', defaultValue: true, description: 'boolean: Version to deploy on production server')
-            }
-  
+     
     stages {
         stage('Checkout') {
             echo "Job Name:  ${params.JOB_NAME}"
@@ -23,15 +16,11 @@ pipeline {
         steps{
                 // Run Maven on a ec2 agent.
               sh 'mvn clean compile'
+              
             }
 
          }
-
-        when{
-            expression{
-                params.EXECUTE_TEST
-                    }
-              }
+        
       
         post {
                 Always {
@@ -45,5 +34,6 @@ pipeline {
           echo "deploying the application"
           echo "deploying version: ${params.VERSION}"
         }
+        
     }
  }
