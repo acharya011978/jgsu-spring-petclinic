@@ -20,7 +20,7 @@ tools{
  stage ("Build") {
         steps{
                 // Run Maven on a ec2 agent.
-              sh 'mvn clean install'
+              sh 'mvn clean compile'
               
             }
 
